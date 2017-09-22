@@ -28,19 +28,34 @@
 			 th {
 				font-weight: 900;
 			 }
-		
+			 #average {
+				height: 70px;
+				width: auto;
+				border: solid 2px #333;
+			 }
 		</style>
 
 	</head>
 	<body>
 		<h1>Table of people!</h1>
+		<div><p id="average"></p></div>
 		<div id="people"></div>
 	</body>
 	<script src="jsonSpread.js"></script>
 	<script>
 		var output = "";
-		var output = "<table>" + "<tr>" +"<th> Name </th>" + "<th> Email </th>" + "<th> Age </th>" + "<th> City </th>" + "</tr>"; 
+		var output = "<table>" + "<tr>" +"<th> Name </th>" + "<th> Email </th>" + "<th> Age </th>" + "<th> City </th>" + "</tr>";
+
 		
+		var sum = 0;
+		for( var i = 0; i < data.length; i++ ){
+			var age = data[i].age;
+			sum += data[i].age; //don't forget to add the base
+		}
+
+		var avg = sum/(data.length+1);
+
+		document.write( "The sum of all the elements is: " + sum + " The average is: " + avg );
 		for(var x = 0; x < data.length; x++) {
 			var name = data[x].Name;
 			var email = data[x].email;
@@ -53,6 +68,8 @@
 		output += "</table>";
 		
 		document.getElementById('people').innerHTML = output;
+		document.getElementById('average').inneHTML = avg;
+		
 
 	</script>
 	<canvas id="myChart" width="400" height="400"></canvas>
